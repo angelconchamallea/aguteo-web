@@ -8,7 +8,7 @@ import type { CurrentFilters } from '@/components/shop/ShopShell'
 export const revalidate = 300
 
 interface TiendaPageProps {
-  searchParams: {
+  searchParams: Promise<{
     category?: string
     stage?: string
     brand?: string
@@ -17,18 +17,19 @@ interface TiendaPageProps {
     sort?: string
     page?: string
     search?: string
-  }
+  }>
 }
 
 export default async function TiendaPage({ searchParams }: TiendaPageProps) {
+  const sp = await searchParams
   const currentFilters: CurrentFilters = {
-    category: searchParams.category ?? '',
-    stage:    searchParams.stage    ?? '',
-    brand:    searchParams.brand    ?? '',
-    minPrice: searchParams.min_price ?? '',
-    maxPrice: searchParams.max_price ?? '',
-    sort:     searchParams.sort     ?? '',
-    page:     searchParams.page     ?? '1',
+    category: sp.category ?? '',
+    stage:    sp.stage    ?? '',
+    brand:    sp.brand    ?? '',
+    minPrice: sp.min_price ?? '',
+    maxPrice: sp.max_price ?? '',
+    sort:     sp.sort     ?? '',
+    page:     sp.page     ?? '1',
   }
 
   const [categories, stages, brands, productsResult] = await Promise.all([
@@ -42,7 +43,7 @@ export default async function TiendaPage({ searchParams }: TiendaPageProps) {
       min_price:  currentFilters.minPrice  ? Number(currentFilters.minPrice) : undefined,
       max_price:  currentFilters.maxPrice  ? Number(currentFilters.maxPrice) : undefined,
       sort:       (currentFilters.sort     || undefined) as 'newest' | 'price_asc' | 'price_desc' | 'featured' | undefined,
-      search:     searchParams.search      || undefined,
+      search:     sp.search                 || undefined,
       page:       Number(currentFilters.page) || 1,
       per_page:   24,
     }).catch(() => ({

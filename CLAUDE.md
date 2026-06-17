@@ -23,7 +23,7 @@ El sistema son DOS repos que se comunican SOLO por la API REST:
 ```
 ┌──────────────────────────┐   API REST (docs/API-SPEC.md)   ┌─────────────────────────┐
 │ aguteo-web (ESTE repo)   │ ───────────────────────────────▶│ aguteo-api (OTRO repo)  │
-│ Next.js 14+ App Router   │                                 │ Laravel 11 + PostgreSQL │
+│ Next.js 15+ App Router   │                                 │ Laravel 11 + PostgreSQL │
 │ TypeScript + Tailwind    │                                 │ Filament (admin)        │
 │ Deploy: Vercel           │                                 │ Webpay Plus             │
 └──────────────────────────┘                                 │ Deploy: Vultr Santiago  │

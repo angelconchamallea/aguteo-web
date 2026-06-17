@@ -11,13 +11,14 @@ import ProductCard from '@/components/ui/ProductCard'
 export const revalidate = 300
 
 interface ProductPageProps {
-  params: { slug: string }
+  params: Promise<{ slug: string }>
 }
 
 export default async function ProductPage({ params }: ProductPageProps) {
+  const { slug } = await params
   let product
   try {
-    product = await getProduct(params.slug)
+    product = await getProduct(slug)
   } catch (e) {
     if (e instanceof ApiException && e.status === 404) notFound()
     throw e

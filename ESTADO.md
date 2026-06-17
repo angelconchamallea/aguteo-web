@@ -132,6 +132,7 @@ de cupones. CORS configurado vía `FRONTEND_URL`. Tests PHPUnit: 20 casos.
 | 2026-06-16 | CORS via config/cors.php + FRONTEND_URL env var | API pública bajo api/* necesita CORS para que Next.js (dominio distinto) pueda llamarla; /admin usa sesión y no lo necesita; origen configurable por entorno sin tocar código |
 | 2026-06-16 | rating=null y reviews_count=0 en toda respuesta de producto (v1) | Sistema de reseñas excluido de v1; los campos se incluyen en el contrato desde ya para que el frontend (ProductCard) pueda diseñar la UI sin cambiar el contrato en v2 |
 | 2026-06-16 | Next.js creado manualmente (sin create-next-app) | create-next-app rechazaba el directorio por los .md previos; la creación manual dio control total sobre las versiones y configuración |
+| 2026-06-17 | Migración Next.js 14 → 15.5.19 | CVEs en 14.x (DoS, cache poisoning, request smuggling); 15.x los parchea. Breaking changes aplicados: params y searchParams en pages son ahora Promise y requieren await |
 
 ---
 
