@@ -3,7 +3,7 @@
 > Documento vivo. Refleja DÓNDE está el proyecto hoy: qué se construyó, qué sigue,
 > y las decisiones tomadas. Se actualiza al cerrar cada hito (ver PROMPTS.md 9.1).
 > NO es especificación (eso vive en docs/); es la foto del avance.
-> Última actualización: 2026-06-16 (A4)
+> Última actualización: 2026-06-17 (W3)
 
 ---
 
@@ -46,7 +46,9 @@ Lista de choque consolidada. El detalle vive en cada CLAUDE.md (secciones 3 y 6)
 
 ## Estado actual
 
-**Fase: A1, A2, A3 y A4 completos ✅ — siguiente: A5 (Órdenes + Webpay).**
+**Fase: A1–A4 y W1–W3 completos ✅ — siguiente: A5 (Órdenes + Webpay) → W4 (Carrito + Checkout).**
+
+**Backend (aguteo-api):**
 
 A1 verificado con `sail artisan migrate:fresh --seed` exitoso (24 migraciones,
 7 seeders, 339 comunas, 33 categorías, 12 productos de muestra).
@@ -64,7 +66,28 @@ marca, precio, búsqueda; sorts; paginación), detalle de producto (variantes co
 resuelto, imágenes, tags, guías relacionadas), guías, tarifas de envío y validación
 de cupones. CORS configurado vía `FRONTEND_URL`. Tests PHPUnit: 20 casos.
 
-**Próximo hito: A5** (Órdenes + Webpay). Ver PROMPTS-CONSTRUCCION.md.
+**Frontend (aguteo-web):**
+
+W1 verificado con proyecto Next.js 15 creado, Tailwind con todos los tokens del
+design system, tipos TypeScript espejo de API-SPEC.md, cliente API con ISR, store
+Zustand (sin persistencia), componentes UI base (Button, Badge, ProductCard,
+StageCard, SectionPill, CategoryCard, PackCard, PriceTag, Skeleton).
+
+W2 verificado con home completa: Topbar, SiteHeader (logo + buscador + carrito
+con badge), HeroSection, StageGrid, CategoryBar + CategoryGrid, FeaturedProducts,
+OfferBanner, PacksSection, BrandStrip, MiniGuideBlock, FounderBlock,
+GuaranteeStrip, SiteFooter (logo original + columnas Tienda/Ayuda/Síguenos +
+sello Webpay, alineado verticalmente al centro). Favicon y logo SVG integrados.
+
+W3 verificado con `/tienda` (filtros por categoría/etapa/marca/precio, sidebar
+desktop + bottom sheet mobile, chips de filtro activos, sort, paginación con gaps,
+estado vacío) y `/producto/[slug]` (galería con miniaturas, selector de variantes,
+aviso de stock bajo, botón desktop + barra fija mobile, breadcrumb, guías
+relacionadas, sección "Te puede servir"). ISR 300s en ambas rutas.
+
+Subido a GitHub: https://github.com/angelconchamallea/aguteo-web
+
+**Próximo hito backend: A5** (Órdenes + Webpay) → luego **W4** (Carrito + Checkout). Ver PROMPTS-CONSTRUCCION.md.
 
 ### Documentos listos (16 archivos)
 
@@ -95,9 +118,9 @@ de cupones. CORS configurado vía `FRONTEND_URL`. Tests PHPUnit: 20 casos.
 
 **Frontend (aguteo-web):**
 - [x] W1 — Fundación + design system + tipos TS ✅ 2026-06-16
-- [ ] W2 — Home ← SIGUIENTE (frontend)
-- [ ] W3 — Catálogo y detalle
-- [ ] W4 — Carrito y checkout (después de A5)
+- [x] W2 — Home ✅ 2026-06-17
+- [x] W3 — Catálogo y detalle ✅ 2026-06-17
+- [ ] W4 — Carrito y checkout (después de A5) ← SIGUIENTE (frontend)
 - [ ] W5 — Mini-guías y pulido
 
 ### Tareas externas en paralelo (tuyas, no de los agentes)
