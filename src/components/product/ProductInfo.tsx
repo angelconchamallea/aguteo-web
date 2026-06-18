@@ -26,7 +26,7 @@ export default function ProductInfo({ product }: ProductInfoProps) {
 
   function handleAddToCart() {
     if (!inStock) return
-    addItem(product)
+    addItem(product, selectedVariant?.id ?? null)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }

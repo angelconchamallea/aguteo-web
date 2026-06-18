@@ -177,6 +177,23 @@ export interface Guide {
 // Envíos
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Geografía (regiones y comunas — usadas en checkout)
+// ---------------------------------------------------------------------------
+
+export interface Region {
+  id: number
+  name: string
+}
+
+export interface Commune {
+  id: number
+  name: string
+  region_id: number
+}
+
+// ---------------------------------------------------------------------------
+
 export interface ShippingRate {
   id: number
   name: string

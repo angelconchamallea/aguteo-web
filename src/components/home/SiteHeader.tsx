@@ -5,6 +5,7 @@ import { useCartStore } from '@/store/cart'
 
 export default function SiteHeader() {
   const count = useCartStore((s) => s.totalCount())
+  const openDrawer = useCartStore((s) => s.openDrawer)
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/95 backdrop-blur-sm">
@@ -16,7 +17,7 @@ export default function SiteHeader() {
             <SearchBar />
           </div>
           <AccountButton />
-          <CartButton count={count} />
+          <CartButton count={count} onOpen={openDrawer} />
         </div>
 
         {/* Mobile: logo + carrito arriba, buscador abajo */}
@@ -25,7 +26,7 @@ export default function SiteHeader() {
             <Logo />
             <div className="flex items-center gap-3">
               <AccountButton />
-              <CartButton count={count} />
+              <CartButton count={count} onOpen={openDrawer} />
             </div>
           </div>
           <SearchBar />
@@ -71,11 +72,11 @@ function AccountButton() {
   )
 }
 
-function CartButton({ count }: { count: number }) {
+function CartButton({ count, onOpen }: { count: number; onOpen: () => void }) {
   return (
-    <Link
-      href="/carrito"
-      aria-label={`Carrito, ${count} productos`}
+    <button
+      onClick={onOpen}
+      aria-label={`Carrito, ${count} producto${count !== 1 ? 's' : ''}`}
       className="relative flex items-center gap-1 text-xs font-sans text-ink hover:text-rose transition-colors"
     >
       <CartIcon />
@@ -85,7 +86,7 @@ function CartButton({ count }: { count: number }) {
           {count > 9 ? '9+' : count}
         </span>
       )}
-    </Link>
+    </button>
   )
 }
 

@@ -10,6 +10,8 @@ import type {
   ProductListParams,
   ProductDetail,
   Guide,
+  Region,
+  Commune,
   ShippingRate,
   CouponValidationBody,
   CouponValidationResult,
@@ -129,6 +131,20 @@ export async function getGuides(stageSlug?: string): Promise<ApiCollection<Guide
 export async function getGuide(slug: string): Promise<Guide> {
   const res = await apiFetch<ApiResource<Guide>>(`/guides/${slug}`, {
     next: { revalidate: 3600 },
+  })
+  return res.data
+}
+
+export async function getRegions(): Promise<Region[]> {
+  const res = await apiFetch<ApiResource<Region[]>>('/regions', {
+    next: { revalidate: 86400 },
+  })
+  return res.data
+}
+
+export async function getCommunes(regionId: number): Promise<Commune[]> {
+  const res = await apiFetch<ApiResource<Commune[]>>(`/communes?region_id=${regionId}`, {
+    next: { revalidate: 86400 },
   })
   return res.data
 }

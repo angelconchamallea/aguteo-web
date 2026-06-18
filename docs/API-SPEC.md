@@ -104,6 +104,17 @@ NUNCA incluir: cost_price, low_stock_threshold.
 Guía: id, title, slug, excerpt, body (markdown), cover_image_url,
 age_stage {…}, products: [items de listado].
 
+### GET /regions
+Devuelve todas las regiones de Chile para el selector de dirección en checkout.
+`{ "data": [ { "id": 1, "name": "Tarapacá" }, { "id": 13, "name": "Metropolitana de Santiago" } ] }`
+Los IDs deben coincidir con los IDs autoincrementales del seeder de aguteo-api.
+Cache sugerido: revalidate 86400s (datos estables).
+
+### GET /communes?region_id=13
+Devuelve las comunas de la región indicada.
+`{ "data": [ { "id": 101, "name": "Santiago", "region_id": 13 }, { "id": 102, "name": "Providencia", "region_id": 13 } ] }`
+Cache sugerido: revalidate 86400s.
+
 ### GET /shipping-rates?commune_id=123
 `{ "data": [ { "id": 1, "name": "Despacho estándar RM", "price": 3500, "free_from_amount": 30000, "estimated_days": "2-4 días hábiles" } ] }`
 
