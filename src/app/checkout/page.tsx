@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { useCartStore } from '@/store/cart'
 import { formatCLP } from '@/lib/format'
 import { getRegions, getCommunes, getShippingRates, validateCoupon, createOrder } from '@/lib/api'
@@ -189,6 +190,25 @@ export default function CheckoutPage() {
 
   return (
     <div className="min-h-screen bg-cream">
+      {/* Header simplificado */}
+      <header className="sticky top-0 z-40 border-b border-line bg-cream/95 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-5xl items-center justify-between px-4 py-3 lg:px-8">
+          <Link href="/" aria-label="Aguteo Babys — inicio">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/logo.svg" alt="Aguteo Babys" className="h-12 w-auto" />
+          </Link>
+          <button
+            onClick={() => router.back()}
+            className="flex items-center gap-1.5 text-sm font-sans text-muted hover:text-ink transition-colors"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} className="h-4 w-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M19 12H5M12 5l-7 7 7 7" />
+            </svg>
+            Volver
+          </button>
+        </div>
+      </header>
+
       <div className="mx-auto max-w-5xl px-4 py-8 lg:px-8">
         <h1 className="mb-8 font-display text-2xl font-bold text-ink md:text-3xl">Checkout</h1>
 
@@ -236,9 +256,11 @@ export default function CheckoutPage() {
                 {loadingRegions ? (
                   <LoadingSelect />
                 ) : regions.length === 0 ? (
-                  <p className="text-sm font-sans text-coral">
-                    No se pudieron cargar las regiones. El servicio estará disponible pronto.
-                  </p>
+                  <div className="rounded-card border border-butter bg-butter-soft px-3 py-2">
+                    <p className="text-sm font-sans text-tangerine-deep">
+                      ⚠️ Las regiones estarán disponibles cuando el backend implemente <code className="text-xs">GET /regions</code> (hito A5).
+                    </p>
+                  </div>
                 ) : (
                   <select
                     required

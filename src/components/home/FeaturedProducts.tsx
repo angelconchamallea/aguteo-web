@@ -2,7 +2,6 @@
 
 import Link from 'next/link'
 import ProductCard from '@/components/ui/ProductCard'
-import { useCartStore } from '@/store/cart'
 import type { ProductListItem } from '@/types/api'
 
 interface FeaturedProductsProps {
@@ -10,8 +9,6 @@ interface FeaturedProductsProps {
 }
 
 export default function FeaturedProducts({ products }: FeaturedProductsProps) {
-  const addItem = useCartStore((s) => s.addItem)
-
   if (products.length === 0) return null
 
   return (
@@ -31,11 +28,7 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
 
         <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={addItem}
-            />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
       </div>

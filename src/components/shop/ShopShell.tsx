@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import ProductCard from '@/components/ui/ProductCard'
-import { useCartStore } from '@/store/cart'
 import type { CategoryRoot, AgeStage, Brand, ProductListItem, PaginationMeta } from '@/types/api'
 
 // ---------------------------------------------------------------------------
@@ -34,7 +33,6 @@ interface ShopShellProps {
 
 export default function ShopShell({ filterOptions, currentFilters, products, meta }: ShopShellProps) {
   const router = useRouter()
-  const addItem = useCartStore((s) => s.addItem)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [localMin, setLocalMin] = useState(currentFilters.minPrice)
   const [localMax, setLocalMax] = useState(currentFilters.maxPrice)
@@ -255,7 +253,7 @@ export default function ShopShell({ filterOptions, currentFilters, products, met
           ) : (
             <div className="grid grid-cols-2 gap-3 md:grid-cols-3 lg:grid-cols-4">
               {products.map((p) => (
-                <ProductCard key={p.id} product={p} onAddToCart={addItem} />
+                <ProductCard key={p.id} product={p} />
               ))}
             </div>
           )}

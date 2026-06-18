@@ -5,14 +5,15 @@ import Link from 'next/link'
 import { useState } from 'react'
 import Badge from './Badge'
 import PriceTag from './PriceTag'
+import { useCartStore } from '@/store/cart'
 import type { ProductListItem } from '@/types/api'
 
 interface ProductCardProps {
   product: ProductListItem
-  onAddToCart?: (product: ProductListItem) => void
 }
 
-export default function ProductCard({ product, onAddToCart }: ProductCardProps) {
+export default function ProductCard({ product }: ProductCardProps) {
+  const addItem = useCartStore((s) => s.addItem)
   const [justAdded, setJustAdded] = useState(false)
   const categoryColor = product.category.color_token
   const softBg = categoryColor + '22'
@@ -23,7 +24,7 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
   function handleAddToCart(e: React.MouseEvent) {
     e.preventDefault()
     e.stopPropagation()
-    onAddToCart?.(product)
+    addItem(product, null)
     setJustAdded(true)
     setTimeout(() => setJustAdded(false), 1500)
   }
@@ -128,10 +129,6 @@ export default function ProductCard({ product, onAddToCart }: ProductCardProps) 
     </Link>
   )
 }
-
-// ---------------------------------------------------------------------------
-// Íconos inline (evita dependencia externa en W1)
-// ---------------------------------------------------------------------------
 
 function HeartIcon() {
   return (
