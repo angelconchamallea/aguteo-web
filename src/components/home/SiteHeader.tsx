@@ -1,11 +1,18 @@
 'use client'
 
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 import { useCartStore } from '@/store/cart'
 
 export default function SiteHeader() {
   const count = useCartStore((s) => s.totalCount())
   const openDrawer = useCartStore((s) => s.openDrawer)
+
+  // Evita hydration mismatch: el servidor no conoce el carrito.
+  // El badge aparece solo tras montar en el cliente.
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+  const visibleCount = mounted ? count : 0
 
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-cream/95 backdrop-blur-sm">
@@ -17,7 +24,7 @@ export default function SiteHeader() {
             <SearchBar />
           </div>
           <AccountButton />
-          <CartButton count={count} onOpen={openDrawer} />
+          <CartButton count={visibleCount} onOpen={openDrawer} />
         </div>
 
         {/* Mobile: logo + carrito arriba, buscador abajo */}
@@ -26,7 +33,7 @@ export default function SiteHeader() {
             <Logo />
             <div className="flex items-center gap-3">
               <AccountButton />
-              <CartButton count={count} onOpen={openDrawer} />
+              <CartButton count={visibleCount} onOpen={openDrawer} />
             </div>
           </div>
           <SearchBar />

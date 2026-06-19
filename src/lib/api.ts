@@ -110,13 +110,13 @@ export async function getProducts(
 ): Promise<ApiCollection<ProductListItem>> {
   const qs = toQueryString(params as Record<string, string | number | boolean | undefined>)
   return apiFetch<ApiCollection<ProductListItem>>(`/products${qs}`, {
-    next: { revalidate: 300 },
+    next: { revalidate: 300, tags: ['products'] },
   })
 }
 
 export async function getProduct(slug: string): Promise<ProductDetail> {
   const res = await apiFetch<ApiResource<ProductDetail>>(`/products/${slug}`, {
-    next: { revalidate: 300 },
+    next: { revalidate: 300, tags: ['products', `product-${slug}`] },
   })
   return res.data
 }
@@ -124,13 +124,13 @@ export async function getProduct(slug: string): Promise<ProductDetail> {
 export async function getGuides(stageSlug?: string): Promise<ApiCollection<Guide>> {
   const qs = stageSlug ? `?stage=${stageSlug}` : ''
   return apiFetch<ApiCollection<Guide>>(`/guides${qs}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600, tags: ['guides'] },
   })
 }
 
 export async function getGuide(slug: string): Promise<Guide> {
   const res = await apiFetch<ApiResource<Guide>>(`/guides/${slug}`, {
-    next: { revalidate: 3600 },
+    next: { revalidate: 3600, tags: ['guides', `guide-${slug}`] },
   })
   return res.data
 }

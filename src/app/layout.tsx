@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Baloo_2, Nunito } from 'next/font/google'
 import './globals.css'
 import CartProvider from '@/components/cart/CartProvider'
-import CartDrawer from '@/components/cart/CartDrawer'
+import CartDrawerLoader from '@/components/cart/CartDrawerLoader'
 
 const baloo = Baloo_2({
   subsets: ['latin'],
@@ -18,10 +18,28 @@ const nunito = Nunito({
   display: 'swap',
 })
 
+const BASE = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://aguteobabys.cl'
+
 export const metadata: Metadata = {
-  title: 'Aguteo Babys — Tienda de productos para bebés',
+  title: {
+    default: 'Aguteo Babys — Tienda de productos para bebés',
+    template: '%s | Aguteo Babys',
+  },
   description:
     'Ropa, alimentación, juguetes y más para tu bebé de 0 a 24 meses. Fundado por papás de gemelos.',
+  metadataBase: new URL(BASE),
+  openGraph: {
+    siteName: 'Aguteo Babys',
+    locale: 'es_CL',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -30,7 +48,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <CartProvider>
           {children}
-          <CartDrawer />
+          <CartDrawerLoader />
         </CartProvider>
       </body>
     </html>

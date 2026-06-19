@@ -8,6 +8,52 @@
   }
 }
 
+/* ── Prose: cuerpo de guías en markdown ─────────────────────────────────── */
+@layer components {
+  .prose {
+    @apply font-sans text-base leading-relaxed text-ink;
+  }
+  .prose h2 {
+    @apply font-display text-xl font-bold text-ink mt-8 mb-3;
+  }
+  .prose h3 {
+    @apply font-display text-lg font-bold text-ink mt-6 mb-2;
+  }
+  .prose p {
+    @apply mb-4;
+  }
+  .prose ul {
+    @apply list-disc list-outside pl-5 mb-4 space-y-1;
+  }
+  .prose ol {
+    @apply list-decimal list-outside pl-5 mb-4 space-y-1;
+  }
+  .prose li {
+    @apply leading-relaxed;
+  }
+  .prose strong {
+    @apply font-bold text-ink;
+  }
+  .prose em {
+    @apply italic;
+  }
+  .prose a {
+    @apply text-aqua-deep underline underline-offset-2 hover:opacity-80;
+  }
+  .prose blockquote {
+    @apply border-l-4 border-aqua pl-4 italic text-muted my-4;
+  }
+  .prose hr {
+    @apply border-line my-8;
+  }
+  .prose img {
+    @apply rounded-card my-4 w-full;
+  }
+  .prose code {
+    @apply rounded bg-line px-1 py-0.5 text-xs font-mono;
+  }
+}
+
 @layer components {
   .paginator-btn {
     @apply inline-flex h-9 min-w-9 items-center justify-center rounded-pill border border-line bg-white px-3 text-sm font-sans text-ink transition hover:bg-cream;

@@ -3,7 +3,7 @@
 > Documento vivo. Refleja DÓNDE está el proyecto hoy: qué se construyó, qué sigue,
 > y las decisiones tomadas. Se actualiza al cerrar cada hito (ver PROMPTS.md 9.1).
 > NO es especificación (eso vive en docs/); es la foto del avance.
-> Última actualización: 2026-06-17 (W3)
+> Última actualización: 2026-06-18 (W4)
 
 ---
 
@@ -46,7 +46,7 @@ Lista de choque consolidada. El detalle vive en cada CLAUDE.md (secciones 3 y 6)
 
 ## Estado actual
 
-**Fase: A1–A4 y W1–W3 completos ✅ — siguiente: A5 (Órdenes + Webpay) → W4 (Carrito + Checkout).**
+**Fase: A1–A5 y W1–W4 completos ✅ — siguiente: W5 (Mini-guías y pulido) → A6 (Producción).**
 
 **Backend (aguteo-api):**
 
@@ -87,7 +87,7 @@ relacionadas, sección "Te puede servir"). ISR 300s en ambas rutas.
 
 Subido a GitHub: https://github.com/angelconchamallea/aguteo-web
 
-**Próximo hito backend: A5** (Órdenes + Webpay) → luego **W4** (Carrito + Checkout). Ver PROMPTS-CONSTRUCCION.md.
+**Próximo hito frontend: W5** (Mini-guías y pulido). Backend: **A6** (Producción). Ver PROMPTS-CONSTRUCCION.md.
 
 ### Documentos listos (16 archivos)
 
@@ -113,15 +113,15 @@ Subido a GitHub: https://github.com/angelconchamallea/aguteo-web
 - [x] A2 — Filament admin (resources + relation managers) ✅ 2026-06-14
 - [x] A3 — Importador Excel de productos ✅ 2026-06-16
 - [x] A4 — API pública de catálogo ✅ 2026-06-16
-- [ ] A5 — Órdenes + Webpay (zona crítica) ← SIGUIENTE
-- [ ] A6 — Producción (revisar Docker)
+- [x] A5 — Órdenes + Webpay (zona crítica) ✅ 2026-06-18
+- [ ] A6 — Producción (revisar Docker) ← SIGUIENTE
 
 **Frontend (aguteo-web):**
 - [x] W1 — Fundación + design system + tipos TS ✅ 2026-06-16
 - [x] W2 — Home ✅ 2026-06-17
 - [x] W3 — Catálogo y detalle ✅ 2026-06-17
-- [ ] W4 — Carrito y checkout (después de A5) ← SIGUIENTE (frontend)
-- [ ] W5 — Mini-guías y pulido
+- [x] W4 — Carrito y checkout ✅ 2026-06-18
+- [ ] W5 — Mini-guías y pulido ← SIGUIENTE (frontend)
 
 ### Tareas externas en paralelo (tuyas, no de los agentes)
 - [ ] Verificar WSL2 (`wsl --list --verbose`) y montar estructura de carpetas
