@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useCartStore } from '@/store/cart'
-import { formatCLP } from '@/lib/format'
+import { formatCLP, resolveImageUrl } from '@/lib/format'
 import { getRegions, getCommunes, getShippingRates, validateCoupon, createOrder } from '@/lib/api'
 import type { Region, Commune, ShippingRate, CouponValidationResult } from '@/types/api'
 
@@ -435,16 +435,17 @@ export default function CheckoutPage() {
                 {entries.map((e) => {
                   const softBg = e.product.category.color_token + '22'
                   const key = `${e.product.id}-${e.variantId ?? 'nv'}`
+                  const imgUrl = resolveImageUrl(e.product.cover_image_url)
                   return (
                     <li key={key} className="flex items-center gap-2">
                       <div
                         className="relative h-10 w-10 shrink-0 overflow-hidden rounded-card"
                         style={{ backgroundColor: softBg }}
                       >
-                        {e.product.cover_image_url && (
+                        {imgUrl && (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
-                            src={e.product.cover_image_url}
+                            src={imgUrl}
                             alt={e.product.name}
                             className="h-full w-full object-cover"
                           />

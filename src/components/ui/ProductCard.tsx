@@ -6,6 +6,7 @@ import { useState } from 'react'
 import Badge from './Badge'
 import PriceTag from './PriceTag'
 import { useCartStore } from '@/store/cart'
+import { resolveImageUrl } from '@/lib/format'
 import type { ProductListItem } from '@/types/api'
 
 interface ProductCardProps {
@@ -17,6 +18,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   const [justAdded, setJustAdded] = useState(false)
   const categoryColor = product.category.color_token
   const softBg = categoryColor + '22'
+  const coverUrl = resolveImageUrl(product.cover_image_url)
 
   const hasDiscount = product.compare_at_price != null && product.discount_percent != null
   const lowStock = !product.in_stock
@@ -42,9 +44,9 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       {/* Imagen 1:1 */}
       <div className="relative aspect-square w-full" style={{ backgroundColor: softBg }}>
-        {product.cover_image_url ? (
+        {coverUrl ? (
           <Image
-            src={product.cover_image_url}
+            src={coverUrl}
             alt={product.name}
             fill
             sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"

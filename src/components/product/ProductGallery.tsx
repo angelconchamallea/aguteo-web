@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { resolveImageUrl } from '@/lib/format'
 import type { ProductImage } from '@/types/api'
 
 interface ProductGalleryProps {
@@ -17,17 +18,14 @@ export default function ProductGallery({
   productName,
   categoryColorHex,
 }: ProductGalleryProps) {
-  // Construye lista: imágenes de galería ó cover como fallback
-  const allImages: ProductImage[] =
-    images.length > 0
-      ? images
-      : coverUrl
-      ? [{ url: coverUrl, alt_text: productName }]
-      : []
+  const resolved = images.length > 0
+    ? images.map((img) => ({ ...img, url: resolveImageUrl(img.url) ?? '' })).filter((img) => img.url)
+    : resolveImageUrl(coverUrl)
+    ? [{ url: resolveImageUrl(coverUrl)!, alt_text: productName }]
+    : []
 
   const [active, setActive] = useState(0)
-  const current = allImages[active]
-
+  const current = resolved[active]
   const softBg = categoryColorHex + '22'
 
   return (
@@ -54,9 +52,9 @@ export default function ProductGallery({
       </div>
 
       {/* Miniaturas */}
-      {allImages.length > 1 && (
+      {resolved.length > 1 && (
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-none">
-          {allImages.map((img, i) => (
+          {resolved.map((img, i) => (
             <button
               key={i}
               onClick={() => setActive(i)}

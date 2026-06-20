@@ -3,7 +3,7 @@
 import { useEffect } from 'react'
 import Link from 'next/link'
 import { useCartStore } from '@/store/cart'
-import { formatCLP } from '@/lib/format'
+import { formatCLP, resolveImageUrl } from '@/lib/format'
 
 export default function CartDrawer() {
   const entries = useCartStore((s) => s.entries)
@@ -84,6 +84,7 @@ export default function CartDrawer() {
             <ul className="space-y-4">
               {entries.map((entry) => {
                 const softBg = entry.product.category.color_token + '22'
+                const imgUrl = resolveImageUrl(entry.product.cover_image_url)
                 const key = `${entry.product.id}-${entry.variantId ?? 'nv'}`
                 return (
                   <li key={key} className="flex gap-3">
@@ -94,10 +95,10 @@ export default function CartDrawer() {
                       className="h-16 w-16 shrink-0 overflow-hidden rounded-card"
                       style={{ backgroundColor: softBg }}
                     >
-                      {entry.product.cover_image_url ? (
+                      {imgUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img
-                          src={entry.product.cover_image_url}
+                          src={imgUrl}
                           alt={entry.product.name}
                           className="h-full w-full object-cover"
                         />
